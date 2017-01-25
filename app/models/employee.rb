@@ -1,6 +1,6 @@
 class Employee
 
-  attr_reader :username, :password
+  attr_reader :username, :password, :id
   def initialize(args = {})
     @id = args[:id]
     @username = args[:username]
@@ -14,5 +14,9 @@ class Employee
 
   def manager?
     @role == 'manager'
+  end
+
+  def to_s
+    "#{@id} - #{@username}"
   end
 end

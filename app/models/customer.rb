@@ -10,4 +10,8 @@ class Customer
   def to_array
     [@id, @name, @address]
   end
+
+  def to_s
+    "#{@id}. #{@name}, #{@address}"
+  end
 end

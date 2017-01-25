@@ -12,5 +12,9 @@ class Meal
   def to_array
     [@name, @price, @id]
   end
+
+  def to_s
+    "#{@id} - #{@name}, $#{@price}"
+  end
 end
 
