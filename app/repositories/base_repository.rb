@@ -31,7 +31,6 @@ end
     end
   end
 
-
   def load_csv
     CSV.foreach(@csv_file, @csv_options)  do |row|
     row[:id] = row[:id].to_i
