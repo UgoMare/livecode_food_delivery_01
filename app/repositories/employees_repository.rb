@@ -1,19 +1,29 @@
 require_relative '../models/employee'
 
-class EmployeesRepository < BaseRepository
-   def self.create_array
-    ['id', 'username', 'password', 'role']
-  end
+class EmployeesRepository
 
-  def create_instance(row)
-    Employee.new(row)
-  end
+  def initialize
+    @employees = []
 
-  def add
-    return nil
+    data = DB.execute('SELECT * FROM employees')
+    data.each do |employee_data|
+      employee = Employee.new(id: employee_data[0].to_i,
+                              username: employee_data[1],
+                              password: employee_data[2],
+                              role: employee_data[3])
+      @employees << employee
+    end
   end
 
   def find_by_username(username)
-    @elements.find {|e| e.username == username}
+    @employees.find {|e| e.username == username}
+  end
+
+  def find(id)
+    @employees.select { |element| element.id == id }[0]
+  end
+
+  def list
+    @employees
   end
 end

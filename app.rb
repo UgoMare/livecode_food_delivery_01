@@ -1,3 +1,4 @@
+require 'sqlite3'
 require 'pry-byebug'
 
 require_relative 'router'
@@ -10,6 +11,8 @@ require_relative 'app/controllers/sessions_controller.rb'
 require_relative 'app/repositories/orders_repository.rb'
 require_relative 'app/controllers/orders_controller.rb'
 
+DATABASE_PATH = File.join(File.dirname(__FILE__), 'data/database.sqlite')
+DB = SQLite3::Database.new(DATABASE_PATH)
 
 meals_repository = MealsRepository.new('data/meals.csv')
 meals_controller = MealsController.new(meals_repository)
@@ -17,7 +20,7 @@ meals_controller = MealsController.new(meals_repository)
 customers_repository = CustomersRepository.new('data/customers.csv')
 customers_controller = CustomersController.new(customers_repository)
 
-employees_repository = EmployeesRepository.new('data/employees.csv')
+employees_repository = EmployeesRepository.new
 sessions_controller = SessionsController.new(employees_repository)
 
 orders_repository = OrderRepository.new('data/orders.csv', meals_repository,
